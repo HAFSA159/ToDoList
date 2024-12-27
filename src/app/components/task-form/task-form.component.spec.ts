@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TaskFormComponent } from './task-form.component';
 
 describe('TaskFormComponent', () => {
@@ -9,9 +8,8 @@ describe('TaskFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TaskFormComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(TaskFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

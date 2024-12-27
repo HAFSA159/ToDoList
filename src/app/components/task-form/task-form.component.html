@@ -1,1 +1,57 @@
-<p>task-form works!</p>
+<div class="task-form-container">
+  <h2>{{ taskToUpdate ? 'Update Task' : 'Add a New Task' }}</h2>
+  <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="taskTitle">Task Title</label>
+      <input type="text" id="taskTitle" class="form-control border p-2 w-full" [(ngModel)]="taskTitle"
+             name="taskTitle" required minlength="3" #taskTitleInput="ngModel" />
+
+      <div *ngIf="taskTitleInput.invalid && taskTitleInput.touched" class="text-red-500 mt-2">
+        <small *ngIf="taskTitleInput.errors?.['required']" class="block">Task title is required.</small>
+        <small *ngIf="taskTitleInput.errors?.['minlength']" class="block">Task title must be at least 3
+          characters long.</small>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="taskDescription">Task Description</label>
+      <textarea id="taskDescription" class="form-control border p-2 w-full" [(ngModel)]="taskDescription"
+                name="taskDescription" maxlength="250"></textarea>
+    </div>
+
+    <!-- Due Date -->
+    <div class="form-group">
+      <label for="taskDueDate">Due Date</label>
+      <input type="datetime-local" id="taskDueDate" class="form-control border p-2 w-full"
+             [(ngModel)]="taskDueDate" name="taskDueDate" required #taskDueDateInput="ngModel" />
+
+      <div *ngIf="taskDueDateInput.invalid && taskDueDateInput.touched" class="text-red-500 mt-2">
+        <small *ngIf="taskDueDateInput.errors?.['required']" class="block">Due date is required.</small>
+      </div>
+    </div>
+
+    <!-- Priority -->
+    <div class="form-group">
+      <label for="taskPriority">Priority</label>
+      <select id="taskPriority" [(ngModel)]="taskPriority" name="taskPriority" class="form-control border p-2 w-full" required>
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="text-red-500 mt-2">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary bg-blue-500 text-white p-2 rounded mt-4"
+            [disabled]="taskForm.invalid">
+      {{ taskToUpdate ? 'Update Task' : 'Add Task' }}
+    </button>
+  </form>
+</div>
