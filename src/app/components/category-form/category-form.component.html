@@ -1,0 +1,27 @@
+    <div class="category-form-container">
+        <h2>{{ categoryToUpdate ? 'Update Category' : 'Add a New Category' }}</h2>
+        <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+            <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" id="categoryName" class="form-control border p-2 w-full" [(ngModel)]="categoryName"
+                    name="categoryName" required minlength="3" #categoryNameInput="ngModel" />
+
+                <!-- Validation Messages -->
+                <div *ngIf="categoryNameInput.invalid && categoryNameInput.touched" class="text-red-500 mt-2">
+                    <small *ngIf="categoryNameInput.errors?.['required']" class="block">Category name is required.</small>
+                    <small *ngIf="categoryNameInput.errors?.['minlength']" class="block">Category name must be at least 3
+                        characters long.</small>
+                </div>
+            </div>
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="text-red-500 mt-2">
+                {{ errorMessage }}
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary bg-blue-500 text-white p-2 rounded mt-4"
+                [disabled]="categoryForm.invalid">
+                {{ categoryToUpdate ? 'Update Category' : 'Add Category' }}
+            </button>
+        </form>
+
+    </div>

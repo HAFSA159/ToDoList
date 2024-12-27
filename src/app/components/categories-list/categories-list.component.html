@@ -1,0 +1,40 @@
+<!-- Categories Section -->
+<div class="categories-section bg-white p-6 rounded-lg shadow-md">
+    <!-- Button to add new category -->
+    <button
+        class="btn btn-primary bg-pink-900 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition duration-200 mb-4 block mx-auto"
+        (click)="onAddCategory()">
+        Add Category
+    </button>
+
+    <!-- Conditionally display the category form -->
+    <div *ngIf="showCategoryForm" class="mt-6">
+        <app-category-form [categoryToUpdate]="categoryToUpdate"
+            (categorySaved)="onCategorySaved($event)"></app-category-form>
+    </div>
+
+    <!-- Category list -->
+    <ul class="mt-6 space-y-4">
+        <li *ngFor="let category of categories"
+            class="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow-lg">
+            <!-- Category name -->
+            <span class="text-lg font-semibold">{{ category.name }}</span>
+
+            <!-- Action buttons -->
+            <div class="space-x-4">
+                <!-- Update button -->
+                <button
+                    class="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-500 transition duration-200"
+                    (click)="onUpdateCategory(category)">
+                    Update
+                </button>
+
+                <!-- Delete button -->
+                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition duration-200"
+                    (click)="onDeleteCategory(category)">
+                    Delete
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
